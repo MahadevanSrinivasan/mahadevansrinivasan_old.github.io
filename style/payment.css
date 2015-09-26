@@ -1,0 +1,12 @@
+  html, body {
+    background-color: #EEEEE6;
+    font-family: 'Droid Serif', serif;
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 30px;
+  }
+
+.link
+{
+  text-align: center;
+}

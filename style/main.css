@@ -1,0 +1,47 @@
+#drop_zone {
+    border: 2px dashed #BBB;
+    border-radius: 5px;
+    padding: 25px;
+    text-align: center;
+    color: #BBB;
+    margin-top: 20px;
+}
+
+#chartContainer {
+  height: 600px;
+  width: 100%;
+}
+
+.Food {
+  background: #ebcccc;
+}
+
+.Gas {
+  background: #d9edf7;
+}
+
+.Grocery {
+  background: #DFF0D8;
+}
+
+.Online {
+  background: #337AB7;
+}
+
+.Travel {
+  background: #FCF8E3;
+}
+
+.Utilities {
+  background: #F2DEDE;
+}
+.Apparel {
+  background: #5cb85c;
+}
+.Entertainment {
+  background: #f0ad4e;
+}
+
+.Misc {
+  background: #edcf72;
+}

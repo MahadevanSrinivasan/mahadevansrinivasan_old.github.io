@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Fixed Top Navbar Example for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="style/sudoku.css" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome-4.1.0/css/font-awesome.min.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Sudoku</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <span class="fa-stack fa-2x">
+              <i class="fa fa-circle fa-stack-2x icon"></i>
+              <i class="fa fa-trophy fa-stack-1x"></i>
+              </span>
+            </li>
+            <li>
+              <span class="fa-stack fa-2x">
+              <a href="#" onclick="hint()">
+              <i class="fa fa-circle fa-stack-2x icon"></i>
+              <i class="fa fa-question fa-stack-1x"></i>
+              </a>
+              </span>
+            </li>
+            <li>
+              <span class="fa-stack fa-2x">
+              <a href="#" onclick="refresh()">
+              <i class="fa fa-circle fa-stack-2x icon"></i>
+              <i class="fa fa-refresh fa-stack-1x"></i>
+              </a>
+              </span>
+            </li>
+            <li>
+              <span class="fa-stack fa-2x">
+              <i class="fa fa-circle fa-stack-2x icon"></i>
+              <i class="fa fa-heart fa-stack-1x"></i>
+              </span>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+      <div id="game-message" class="message text-lowercase">Begin Game!</div>
+      </div>
+      <!-- Main component for a primary marketing message or call to action -->
+      <div class="center-block">
+        <div class="row">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-u" id="0" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-u" id="1" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-u" id="2" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-u" id="3" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-u" id="4" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-u" id="5" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-u" id="6" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-u" id="7" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-u" id="8" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+        </div>
+        <div class="row">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l" id="9" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell" id="10" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r" id="11" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l" id="12" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell" id="13" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r" id="14" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l" id="15" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell" id="16" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r" id="17" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+        </div>
+        <div class="row">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-d" id="18" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-d" id="19" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-d" id="20" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-d" id="21" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-d" id="22" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-d" id="23" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-d" id="24" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-d" id="25" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-d" id="26" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+        </div>
+        <div class="row">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-u" id="27" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-u" id="28" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-u" id="29" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-u" id="30" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-u" id="31" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-u" id="32" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-u" id="33" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-u" id="34" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-u" id="35" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+        </div>
+        <div class="row">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l" id="36" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell" id="37" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r" id="38" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l" id="39" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell" id="40" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r" id="41" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l" id="42" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell" id="43" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r" id="44" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+        </div>
+        <div class="row">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-d" id="45" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-d" id="46" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-d" id="47" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-d" id="48" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-d" id="49" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-d" id="50" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-d" id="51" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-d" id="52" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-d" id="53" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+        </div>
+        <div class="row">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-u" id="54" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-u" id="55" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-u" id="56" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-u" id="57" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-u" id="58" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-u" id="59" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-u" id="60" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-u" id="61" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-u" id="62" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+        </div>
+        <div class="row">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l" id="63" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell" id="64" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r" id="65" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l" id="66" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell" id="67" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r" id="68" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l" id="69" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell" id="70" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r" id="71" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+        </div>
+        <div class="row">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-d" id="72" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-d" id="73" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-d" id="74" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-d" id="75" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-d" id="76" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-d" id="77" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-l cell-d" id="78" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-d" id="79" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+          <input type="tel" pattern="[0-9]?" class="sudoku-cell cell-r cell-d" id="80" autocomplete="off" onkeyup="checkVal(this)" onInput="reset(this)" maxlength="1">
+        </div>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/sudoku.js"></script>
+    <script type="text/javascript" src="js/application.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+  </body>
+</html>

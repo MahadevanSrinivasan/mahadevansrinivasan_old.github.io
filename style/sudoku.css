@@ -1,0 +1,387 @@
+  html, body {
+
+  }
+
+
+  body {
+
+  }
+
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance:textfield;
+  }
+
+.button {
+ font-family: Helvetica ;
+ font-weight: bold ;
+ padding: 15px;
+ border: 1px solid black ;
+ -moz-border-radius: 8px ;
+ -webkit-border-radius: 8px ;
+ margin-top: 10px ;
+ margin-bottom: 10px ;
+ background-color: white ;
+}
+  .row {
+    margin: 0px;
+  }
+
+  .gameboard {
+    margin-top: 10px;
+  }
+
+  .icon {
+    color: #149C82;
+    text-decoration: none;
+  }
+
+  .navbar-custom {
+    background-color:#E88064;
+    color:#fff;
+    border-radius:0;
+    font-size: 20px;
+    font-family: 'Voltaire', sans-serif;
+  }
+
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+  }
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color:transparent;
+  }
+.navbar-custom .navbar-brand {
+    color:#fff;
+    font-size: 6 0px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+  }
+
+  @media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+    }
+  }
+
+@media screen and (min-width: 600px) {
+  .container1 {
+    width: 600px;
+    margin: 0 auto; }
+  .sudoku
+  {
+    margin: 0 auto;
+  }
+
+  .title {
+  font-family: 'Voltaire', sans-serif;
+  font-size: 60px;
+  font-weight: bold;
+  margin: 0px;
+  display: block;
+  float: left;
+  }
+
+  .scores-container {
+    float: right;
+    text-align: right;
+  }
+
+  .score-container {
+    background: #149C82;
+    padding: 5px 15px;
+    font-size: 25px;
+    height: 50px;
+    line-height: 47px;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-top: 8px;
+    text-align: center;
+    margin-right: 16px;
+    border-width: 2px;
+    border-color: #776E65;
+    float:left;
+    color: #fff;
+  }
+
+  .newgame {
+    display: inline-block;
+    background: #149C82;
+    padding: 5px 15px;
+    text-decoration: none;
+    font-size: 25px;
+    height: 50px;
+    line-height: 35px;
+    font-weight: bold;
+    border-radius: 10px;
+    margin-top: 8px;
+    text-align: center;
+    float: right;
+    cursor: pointer;
+    display: block;
+    color: #fff;
+  }
+
+  form {
+      font-size: 0;
+  }
+
+  .message {
+    margin-top: 10px;
+    font-family: 'Voltaire', sans-serif;
+    font-size: 30px;
+    font-weight: normal;
+    float: left;
+    margin-left: 0px;
+  }
+
+  .no-padding {
+    padding-left: 0px;
+    padding-right: 0px;
+    height:
+  }
+
+  .sudoku-cell {
+  width: 60px;
+  height: 60px;
+  margin: 1px;
+  border-radius: 15px;
+  padding: 0 0px;
+  background: #149C82;
+  border-color: #5A483B;
+  border-width: 1px;
+  border-style: solid;
+  float:left;
+  }
+
+  input {
+    border: 0px;
+    outline: 0px;
+    margin: 0px;
+    background: transparent;
+    width: 56.25px;
+    height: 56.25px;
+    line-height: 0px;
+    padding: 0 0px;
+    font-size:50px;
+    text-align:center;
+    font-family: 'Voltaire', sans-serif;
+    color: #FFF;
+
+}
+  .wrong-cell {
+    color: #fe5263;
+    font-weight: bolder;
+  }
+
+  .maybe-cell {
+    color: #C87F0A;
+    font-weight: bolder;
+  }
+
+  .right-cell {
+    color: #1A242F;
+    font-weight: bolder;
+  }
+
+
+  .cell-d
+  {
+  margin-bottom: 3px;
+  border-bottom-width: 2px;
+  border-style: solid;
+  }
+
+  .cell-u
+  {
+  margin-top: 3px;
+  border-top-width: 2px;
+  border-style: solid;
+  }
+
+  .cell-l
+  {
+  margin-left: 3px;
+  border-left-width: 2px;
+  border-style: solid;
+  }
+
+  .cell-r
+  {
+  margin-right: 3px;
+  border-right-width: 2px;
+  border-style: solid;
+  }
+
+  .readOnly {
+    font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container1 {
+    width: 300px;
+    margin: 20px auto;
+    padding: 0px;
+  }
+
+  .sudoku
+  {
+    margin: 0 auto;
+  }
+
+  .title {
+  font-family: 'Voltaire', sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 0px;
+  display: block;
+  float: left;
+  /* background: #69D2E7;
+  border-radius: 10px;
+  padding-right: 10px;
+  padding-left: 10px; */
+  }
+
+  .scores-container {
+    float: right;
+    text-align: right;
+  }
+
+ .score-container {
+    background: #149C82;
+    padding: 3px 8px;
+    font-size: 12px;
+    height: 25px;
+    line-height: 25px;
+    font-weight: bold;
+    border-radius: 3px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    text-align: center;
+    margin-right: 14px;
+    float:left;
+    color: #fff;
+  }
+
+  .newgame {
+    display: inline-block;
+    background: #149C82;
+    padding: 2px 8px;
+    text-decoration: none;
+    font-size: 12px;
+    height: 25px;
+    line-height: 25px;
+    font-weight: bold;
+    border-radius: 3px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    text-align: center;
+    margin-right: 4px;
+    float: right;
+    cursor: pointer;
+    display: block;
+    color: #fff;
+  }
+
+  .message {
+    margin-top: 10px;
+    font-family: 'Voltaire', sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    float: left;
+    margin-left: 0px;
+  }
+
+  .sudoku-cell {
+  width: 32.5px;
+  height: 32.5px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  border-radius: 5px;
+  padding: 0 0px;
+  background: #149C82;
+  border-color: #5A483B;
+  border-width: 1px;
+  border-style: solid;
+  float:left;
+  }
+
+  input {
+    border: 0;
+    outline: 0;
+    background: transparent;
+    width: 30.0px;
+    height: 30.0px;
+    line-height: 0px;
+    padding: 0 0px;
+    font-family: 'Voltaire', sans-serif;
+    font-size:27px;
+    text-align:center;
+    color: #FFF;
+  }
+
+  input[type=number]::-webkit-outer-spin-button,
+  input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance:textfield;
+  }
+
+  .wrong-cell {
+    color: #fe5263;
+    font-weight: bolder;
+  }
+
+  .maybe-cell {
+    color: #C87F0A;
+    font-weight: bolder;
+  }
+
+  .right-cell {
+    color: #1A242F;
+    font-weight: bolder;
+  }
+
+  .cell-d
+  {
+  margin-bottom: 1px;
+  border-bottom-width: 1px;
+  border-style: solid;
+  }
+
+  .cell-u
+  {
+  margin-top: 1px;
+  border-top-width: 1px;
+  border-style: solid;
+  }
+
+  .cell-l
+  {
+  margin-left: 1px;
+  border-left-width: 1px;
+  border-style: solid;
+  }
+
+  .cell-r
+  {
+  margin-right: 1px;
+  border-right-width: 1px;
+  border-style: solid;
+  }
+
+  .readOnly {
+    font-weight: normal;
+  }
+}
