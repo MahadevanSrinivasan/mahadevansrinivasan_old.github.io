@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Upstream linux kernel on a Raspberry Pi</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="../style/styleextend.css" rel="stylesheet">
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <div class="navbar-brand"><a href="index.html">The Shy Bul<i class="fa fa-lightbulb-o fa-rotate-180" style="color:#4582ec"></i></a></div>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li><a href="../index.html">Projects</a></li>
+            <li><a href="../blog.html">Blog</a></li>
+        </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+      <div class="col-md-10">
+        <h2>Upstream linux kernel on a Raspberry Pi</h2>
+      </div>
+    </div>
+      <div class="row">
+      <div class="col-md-10">
+        <div class="text">
+          <p>Recently, I signed up for the <a href="http://eudyptula-challenge.org/">Eudyptula Challenge</a>. If you have not heard of it, it is a series of programming exercises designed to train you with Linux Kernel Development process.</p>
+<p>One of the tasks is to install the latest linux kernel on your machine. You have an option of doing it in a Virtual box setting. Hey, but where is the fun in doing that? I had a Raspberry Pi handy and found a couple of good Wiki pages on how to compile your own kernel for Raspberry Pi (<a href="http://elinux.org/RPi_Upstream_Kernel_Compilation">here</a> and <a href="http://elinux.org/RPi_Kernel_Compilation">here</a>). These two pages have the all the info needed but it is kind of scattered.</p>
+<p>Fastest way to compile the kernel is to do in in Ubuntu (You could technically do it on a MAC, but it is slightly more involved). I tried on my MAC first but ended up installing Ubuntu through Virtualbox to do the compilation. Here are the steps:</p>
+<ul>
+<li><a href="http://www.simplehelp.net/2015/06/09/how-to-install-ubuntu-on-your-mac/">Install Virtualbox on your MAC</a> (skip if you already have a Ubuntu setup)
+<ul>
+<li>Make sure you allocate atleast 16 GB for your Ubuntu partition.</li>
+</ul>
+</li>
+<li>Create a new directory in your home directory and call it whatever you want (I called it linux).</li>
+<li>Install git using the following command:
+<pre>sudo apt-get install git</pre>
+</li>
+<li>Change your current directory to the new  one you just created.</li>
+<li>Run this command to get the compiler:
+<pre>sudo apt-get install gcc-arm-linux-gnueabi make ncurses-dev</pre>
+</li>
+<li>Run this command to get the u-boot (default raspberry pi bootloader won&#8217;t work for the upstream kernel)
+<pre>git clone https://github.com/swarren/u-boot</pre>
+</li>
+<li>Get the kernel source from Linus Torvalds
+<pre>git clone <a class="external free" href="git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git" rel="nofollow">git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git</a> --depth=1</pre>
+</li>
+<li>Create the following exports:
+<pre>export KERNEL_SRC=/path/to/your/linux
+export CCPREFIX=/path/to/your/compiler/binary/prefix-of-binary-
+mkdir /path/to/your/modules
+export MODULES_TEMP=/path/to/your/modules</pre>
+</li>
+<li>Time to create a config file which tells what to compile and what not to.  (ARCH=arm &amp; CROSS_COMPILE=${CCPREFIX} very important).
+<pre>$ cd linux
+$ ARCH=arm CROSS_COMPILE=${CCPREFIX} make bcm2835_defconfig
+$ ARCH=arm CROSS_COMPILE=${CCPREFIX} make menuconfig</pre>
+</li>
+<li>Second command creates a .config file in your current directory and the menuconfig command opens up a new window for selecting different modules to compile. Just enabled the option which says &#8220;Modules&#8221; and save the configuration.</li>
+<li>Finally to do the actual the compilation and install all the needed modules (in a temporary location):
+<pre>$ ARCH=arm CROSS_COMPILE=${CCPREFIX} chrt -i 0 make -j 2
+$ ARCH=arm CROSS_COMPILE=${CCPREFIX} INSTALL_MOD_PATH=${MODULES_TEMP} make modules_install</pre>
+</li>
+<li>Once kernel compiles successfully (which it should if you have followed the steps), time to compile the bootloader. Run the following commands:
+<pre>$ cd ../u-boot
+$ git checkout -b rpi_dev origin/rpi_dev
+$ ARCH=arm CROSS_COMPILE=${CCPREFIX} chrt -i 0 make rpi_config
+$ ARCH=arm CROSS_COMPILE=${CCPREFIX} chrt -i 0 make -j 8</pre>
+</li>
+<li>Once this is done, go inside the tools directory under u-boot directory:
+<pre>$ cd tools</pre>
+</li>
+<li>Create a file by name boot.scr with the following contents (for Raspberry Pi Model B):
+<pre>mmc dev 0
+setenv fdtfile bcm2835-rpi-b.dtb
+setenv bootargs earlyprintk console=tty0 console=ttyAMA0 root=/dev/mmcblk0p2 rootwait
+fatload mmc 0:1 ${kernel_addr_r} zImage
+fatload mmc 0:1 ${fdt_addr_r} ${fdtfile}
+bootz ${kernel_addr_r} - ${fdt_addr_r}</pre>
+</li>
+<li>Or for Model B+:
+<pre>mmc dev 0
+setenv fdtfile bcm2835-rpi-b-plus.dtb
+setenv bootargs earlyprintk console=tty0 console=ttyAMA0 root=/dev/mmcblk0p2 rootwait
+fatload mmc 0:1 ${kernel_addr_r} zImage
+fatload mmc 0:1 ${fdt_addr_r} ${fdtfile}
+bootz ${kernel_addr_r} - ${fdt_addr_r}</pre>
+</li>
+<li>And then run the following command (this should generate a boot.scr.img)
+<pre>$ ./mkimage -A arm -O linux -T script -C none -n boot.scr -d boot.scr boot.scr.uimg</pre>
+</li>
+<li>Now, go to your /boot directory on your Raspberry Pi and create a new directory called backup and move everything inside the backup directory. You might have to sudo the last command.
+<pre>$ export SD=/boot
+$ mkdir $SD/backup
+$ mv $SD/* $SD/backup</pre>
+</li>
+<li>Fetch start.elf and bootcode.bin from <a class="external free" href="https://github.com/raspberrypi/firmware/tree/master/boot" rel="nofollow">https://github.com/raspberrypi/firmware/tree/master/boot</a> and save it to your <tt>$SD</tt></li>
+<li>Finally, move all the required files from your Ubuntu machine to your Raspberry Pi using scp. You might have to move it to a temporary location first (in this case I am moving it to the home directory).
+<pre>$ scp u-boot/u-boot.bin pi@192.168.1.101:~/kernel.img
+$ scp linux/arch/arm/boot/zImage linux/arch/arm/boot/dts/bcm2835-rpi-b.dtb u-boot/tools/boot.scr.uimg pi@192.168.1.101:~/</pre>
+</li>
+<li>Go to your Raspberry Pi and use sudo mv to move the files from your home directory to the /boot directory as follows:
+<pre>$ sudo mv ~/kernel.img ~/zImage ~/bcm2835-rpi-b.dtb ~/boot.scr.uimg /boot/</pre>
+</li>
+<li>Now your boot directory should have the following files:
+<pre>u-boot.bin
+kernel.img
+zImage 
+bcm2835-rpi-b.dtb 
+boot.scr.uimg
+start.elf
+bootcode.bin</pre>
+<ul>
+<li>For Model B+, you will have bcm2835-rpi-b-plus.dtb instead of bcm2835-rpi-b.dtb.</li>
+<li>Copy your source code from the Ubuntu machine to your Raspberry Pi:
+<pre>$ scp -r /path/to/your/linux/ pi@192.168.1.101:/home/pi/</pre>
+</li>
+<li>Change the permissions just in case
+<pre>$ cd /home/pi
+$ sudo chown -R pi:pi linux/</pre>
+</li>
+<li>Copy the modules next (Move to a temporary folder if you can&#8217;t write to /lib/modules directly and then sudo mv it).
+<pre>$ sudo scp -r /path/to/your/modules/`uname -r`/ pi@192.168.1.101:/lib/modules/</pre>
+</li>
+<li>Correct the symbolic links next:
+<pre>$ sudo cd /lib/modules/`uname -r`/
+$ sudo rm build source
+$ ln -s /home/pi/linux build
+$ ln -s /home/pi/linux source</pre>
+</li>
+<li>Finally, we need to fix one more problem: During the cross-compilation build, a couple scripts were compiled for the host. We also need them for the Raspberry Pi. Still on the Pi, this can be checked with e.g.
+<pre>$ file /home/pi/linux/scripts/recordmcount (returns something with x86-64)
+$ cd /home/pi/linux/
+$ make scripts
+$ file /home/pi/linux/scripts/recordmcount (now returns something with 32-bit and ARM)</pre>
+</li>
+<li>Reboot the device and see your new kernel load in all its glory.</li>
+</ul>
+</li>
+</ul>
+        </div>
+    </div>
+  </div>
+      <hr>
+
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2015 The Shy Bulb</p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../dist/js/bootstrap.min.js"></script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61562983-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
